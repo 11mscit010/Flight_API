@@ -1,0 +1,15 @@
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\bin\Debug\netcoreapp2.1\appsettings.Development.json
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\bin\Debug\netcoreapp2.1\appsettings.json
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\bin\Debug\netcoreapp2.1\configuration.json
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\bin\Debug\netcoreapp2.1\APIGateway_FlightBooking.deps.json
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\bin\Debug\netcoreapp2.1\APIGateway_FlightBooking.runtimeconfig.json
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\bin\Debug\netcoreapp2.1\APIGateway_FlightBooking.runtimeconfig.dev.json
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\bin\Debug\netcoreapp2.1\APIGateway_FlightBooking.dll
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\bin\Debug\netcoreapp2.1\APIGateway_FlightBooking.pdb
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\obj\Debug\netcoreapp2.1\APIGateway_FlightBooking.GeneratedMSBuildEditorConfig.editorconfig
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\obj\Debug\netcoreapp2.1\APIGateway_FlightBooking.AssemblyInfoInputs.cache
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\obj\Debug\netcoreapp2.1\APIGateway_FlightBooking.AssemblyInfo.cs
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\obj\Debug\netcoreapp2.1\APIGateway_FlightBooking.csproj.CoreCompileInputs.cache
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\obj\Debug\netcoreapp2.1\APIGateway_FlightBooking.dll
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\obj\Debug\netcoreapp2.1\APIGateway_FlightBooking.pdb
+D:\Harshal\H&T Project\FlightBooking_API\FlightBooking_API\obj\Debug\netcoreapp2.1\APIGateway_FlightBooking.genruntimeconfig.cache

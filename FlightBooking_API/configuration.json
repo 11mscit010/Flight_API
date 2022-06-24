@@ -1,0 +1,626 @@
+{
+  "Routes": [
+    //Airline Service Configuration
+    {
+      "DownstreamPathTemplate": "/WeatherForecast",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9100"
+        }
+      ],
+      "UpstreamPathTemplate": "/Airline/Test",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Airline/Add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9100"
+        }
+      ],
+      "UpstreamPathTemplate": "/Airline/Add",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Airline/Update",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9100"
+        }
+      ],
+      "UpstreamPathTemplate": "/Airline/Update",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Airline/BlockAction",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9100"
+        }
+      ],
+      "UpstreamPathTemplate": "/Airline/BlockUnblock",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Airline/GetAll",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9100"
+        }
+      ],
+      "UpstreamPathTemplate": "/Airline/GetAll",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin" //Check for both role "Admin,User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Airline/GetById",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9100"
+        }
+      ],
+      "UpstreamPathTemplate": "/Airline/GetById",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin" //Check for both role "Admin,User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Airline/Find",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9100"
+        }
+      ],
+      "UpstreamPathTemplate": "/Airline/Find",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+
+    //Flight Service Configuration
+    {
+      "DownstreamPathTemplate": "/WeatherForecast",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9200"
+        }
+      ],
+      "UpstreamPathTemplate": "/Flight/Test",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Flight/Add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9200"
+        }
+      ],
+      "UpstreamPathTemplate": "/Flight/Add",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Flight/Update",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9200"
+        }
+      ],
+      "UpstreamPathTemplate": "/Flight/Update",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Flight/Delete",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9200"
+        }
+      ],
+      "UpstreamPathTemplate": "/Flight/Delete",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Flight/GetById",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9200"
+        }
+      ],
+      "UpstreamPathTemplate": "/Flight/GetById",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Flight/GetByLocation",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9200"
+        }
+      ],
+      "UpstreamPathTemplate": "/Flight/GetByLocation",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      } //,
+      //"RouteClaimsRequirement": {
+      //  "UserRole": [ "Admin", "User" ]
+      //}
+    },
+    {
+      "DownstreamPathTemplate": "/api/Flight/AllowToCancelTicket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9200"
+        }
+      ],
+      "UpstreamPathTemplate": "/Flight/AllowToCancelTicket",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Flight/GetAll",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9200"
+        }
+      ],
+      "UpstreamPathTemplate": "/Flight/GetAll",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+
+    //Booking Sevice Configuration
+    {
+      "DownstreamPathTemplate": "/WeatherForecast",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/Test",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Booking/BookTicket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/BookTicket",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Booking/CancelTicket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/CancelTicket",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Booking/GetTicketByPNR",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/GetTicketByPNR",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Booking/GetBookingHistory",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/GetBookingHistory",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Booking/GetBookingById",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/GetBookingById",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Booking/GetBookingByUserId",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/GetBookingByUserId",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Booking/GetBookingDetailByBookingId",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/GetBookingDetailByBookingId",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Booking/CreatePDFTicket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/CreatePDFTicket",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
+
+    //User Service Configurations
+    {
+      "DownstreamPathTemplate": "/WeatherForecast",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9400"
+        }
+      ],
+      "UpstreamPathTemplate": "/User/Test",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/Register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9400"
+        }
+      ],
+      "UpstreamPathTemplate": "/User/Register",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/Login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9400"
+        }
+      ],
+      "UpstreamPathTemplate": "/User/Login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/Refresh-Token",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9400"
+        }
+      ],
+      "UpstreamPathTemplate": "/User/Refresh-Token",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/Test",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9400"
+        }
+      ],
+      "UpstreamPathTemplate": "/User/TestJwt",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //Discount Service Configuration
+    {
+      "DownstreamPathTemplate": "/api/Discount/Add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9500"
+        }
+      ],
+      "UpstreamPathTemplate": "/Discount/Add",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/Delete",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9500"
+        }
+      ],
+      "UpstreamPathTemplate": "/Discount/Delete",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/GetAll",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9500"
+        }
+      ],
+      "UpstreamPathTemplate": "/Discount/GetAll",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/GetByCode",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9500"
+        }
+      ],
+      "UpstreamPathTemplate": "/Discount/GetByCode",
+      "UpstreamHttpMethod": [ "GET" ]
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      //"RouteClaimsRequirement": {
+      //  "UserRole": "Admin"
+      //}
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/GetById",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9500"
+        }
+      ],
+      "UpstreamPathTemplate": "/Discount/GetById",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/Find",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9500"
+        }
+      ],
+      "UpstreamPathTemplate": "/Discount/Find",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "Admin"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration"
+  }
+}

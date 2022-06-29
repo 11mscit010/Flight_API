@@ -80,9 +80,9 @@ namespace AirlineService.Controllers
             //Logo
             if (!string.IsNullOrEmpty(input.FileAsBase64))
             {
-                string wwwPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+                string wwwPath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
 
-                filePathName = wwwPath + Path.GetFileNameWithoutExtension(input.Logo) + "-" +
+                filePathName = wwwPath + '\\' + Path.GetFileNameWithoutExtension(input.Logo) + "-" +
                         DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") +
                         Path.GetExtension(input.Logo);
                 if (input.FileAsBase64.Contains(","))
@@ -100,11 +100,13 @@ namespace AirlineService.Controllers
             input1.Name = input.Name;
             if (!string.IsNullOrEmpty(filePathName))
             {
-                input1.Logo = filePathName;
+                var fileName = Path.GetFileName(filePathName);
+                input1.Logo = "/Images/" + fileName;
             }
             input1.ContactNumber = input.ContactNumber;
             input1.Address = input.Address;
             input1.IsBlock = false;
+            input1.Id = input.Id;
 
             airlineRepository.UpdateAirline(input1);
             airlineRepository.SaveChanges();

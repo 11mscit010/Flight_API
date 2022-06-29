@@ -64,9 +64,22 @@ namespace FlightService.Controllers
         }
 
         [HttpGet("GetByLocation")]
-        public ActionResult<string> GetByLocation(string source, string destination)
+        public ActionResult<string> GetByLocation(string source, string destination, int bookType)
         {
-            var flight = flightRepository.GetFlightbyLocation(source,destination);
+            if (bookType == 2)
+            {
+                object resultList;
+                var oneFlightList = flightRepository.GetFlightbyLocation(source, destination);
+                var roundFlightList = flightRepository.GetFlightbyLocation(destination, source);
+                resultList = new
+                {
+                    OneWayList = oneFlightList,
+                    RoundTripList = roundFlightList
+                };
+                var results = JsonConvert.SerializeObject(resultList);
+                return Ok(results);
+            }
+            var flight = flightRepository.GetFlightbyLocation(source, destination);
             var result = JsonConvert.SerializeObject(flight);
             return Ok(result);
         }
@@ -85,6 +98,15 @@ namespace FlightService.Controllers
         public ActionResult<string> GetAll()
         {
             var flight = flightRepository.GetAll();
+            var result = JsonConvert.SerializeObject(flight);
+            return Ok(result);
+        }
+
+        [HttpGet("GetListByIds")]
+        public ActionResult<string> GetListByIds(string ids)
+        {
+            var idList = ids.Split(',').ToList();
+            var flight = flightRepository.GetListByIds(idList);
             var result = JsonConvert.SerializeObject(flight);
             return Ok(result);
         }

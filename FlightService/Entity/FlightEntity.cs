@@ -25,5 +25,6 @@ namespace FlightService.Entity
         public int AirlineId { get; set; }
         [DefaultValue(false)]
         public bool IsBlock { get; set; }
+
     }
 }

@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace BookingService.Controllers
@@ -43,7 +45,9 @@ namespace BookingService.Controllers
                 FlightId = input.FlightId,
                 BookingDate = input.BookingDate,
                 UserId = input.UserId,
-                TicketPrice = input.TicketPrice
+                TicketPrice = input.TicketPrice,
+                ReturnFlightId = input.ReturnFlightId,
+                ReturnDate = input.ReturnDate
             };
             var result = bookingRepository.AddBooking(booking);
             if (result <= 0)
@@ -109,9 +113,9 @@ namespace BookingService.Controllers
         }
 
         [HttpGet("GetBookingByUserId")]
-        public ActionResult<string> GetBookingByUserId(int userId)
+        public ActionResult<string> GetBookingByUserId(int userId, bool fromHistory)
         {
-            var bookingDetails = bookingRepository.GetBookingByUserId(userId);
+            var bookingDetails = bookingRepository.GetBookingByUserId(userId,fromHistory);
             var result = JsonConvert.SerializeObject(bookingDetails);
             return Ok(result);
         }
@@ -129,7 +133,7 @@ namespace BookingService.Controllers
 
         }
 
-        [HttpPost("CreatePDFTicket")]
+        [HttpGet("CreatePDFTicket")]
         public async Task<IActionResult> CreatePDFTicket(int bookingId)
         {
             var booking = bookingRepository.GetBookingById(bookingId);
@@ -147,39 +151,84 @@ namespace BookingService.Controllers
 
             //Generate PDF:
             var file = PDFGenerator.GenerateTicket(model);
-            return File(file, "application/pdf");
-
-            //var bytes = await System.IO.File.ReadAllBytesAsync(file);
-            //return File(bytes, "application/pdf", Path.GetFileName(file));
-
-            //return File(@"D:\Harshal\H&T Project\FlightBooking_API\TicketService\Downloads\Sample_Test.pdf", "application/pdf");
-            //var filenamePath = Path.Combine(Directory.GetCurrentDirectory(), "Downloads", booking.PNR+DateTime.Today.Minute+"_Ticket.pdf");
-
-            //var globalSettings = new GlobalSettings
-            //{
-            //    ColorMode = ColorMode.Color,
-            //    Orientation = Orientation.Portrait,
-            //    PaperSize = PaperKind.A4,
-            //    Margins = new MarginSettings { Top = 10 },
-            //    DocumentTitle = "PDF Report",
-            //    Out = @"D:\PDFCreator\Employee_Report.pdf"
-            //};
-            //var objectSettings = new ObjectSettings
-            //{
-            //    PagesCount = true,
-            //    HtmlContent = PDFGenerator.GetPDFTicketHTML(model),
-            //    WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "Utility", "PDFTicket.css") },
-            //    HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
-            //    FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
-            //};
-            //var pdf = new HtmlToPdfDocument()
-            //{
-            //    GlobalSettings = globalSettings,
-            //    Objects = { objectSettings }
-            //};
-            //var file = converter.Convert(pdf);
             //return File(file, "application/pdf");
 
+            //var memory = new MemoryStream();
+
+            //using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            //{
+            //    await stream.CopyToAsync(memory);
+            //}
+            //memory.Position = 0;
+
+            //return File(memory, "application/pdf", Path.GetFileName(file));
+            return Ok(file);
+
+
+        }
+
+        [HttpGet("GetDetailByBookingId")]
+        public async Task<ActionResult<string>> GetDetailByBookingId(int id)
+        {
+            try
+            {
+                var bookingMaster = bookingRepository.GetBookingById(id);
+                var bookDetails = bookingRepository.GetBookingDetailById(id);
+                dynamic booking = "";
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:9200/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    //GET Method
+                    var ids = string.Join(',', bookingMaster.FlightId, bookingMaster.ReturnFlightId);
+                    HttpResponseMessage response = await client.GetAsync("api/Flight/GetListByIds?ids=" + ids);
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+
+                        var flightDetail = JsonConvert.DeserializeObject<List<FlightModel>>(JsonConvert.DeserializeObject<object>(apiResponse).ToString());
+                        var flight1 = flightDetail.FirstOrDefault(z => z.Id == bookingMaster.FlightId);
+                        var flight2 = flightDetail.FirstOrDefault(z => z.Id == bookingMaster.ReturnFlightId);
+
+                        booking = new
+                        {
+                            Id = bookingMaster.Id,
+                            BookingDate = bookingMaster.BookingDate.ToString("dd/MM/yyyy HH:mm"),
+                            Email = bookingMaster.Email,
+                            FlightId = bookingMaster.FlightId,
+                            NoOfSeat = bookingMaster.NoOfSeat,
+                            PNR = bookingMaster.PNR,
+                            TicketPrice = bookingMaster.TicketPrice,
+                            UserId = bookingMaster.UserId,
+                            BookingDetails = bookDetails,
+                            ReturnDate = bookingMaster.ReturnDate.ToString("dd/MM/yyyy HH:mm"),
+                            ReturnFlightId = bookingMaster.ReturnFlightId,
+                            FlightRoute = flight1 != null ? flight1.FromPlace + " To " + flight1.ToPlace : "",
+                            ReturnFlightRoute = flight2 != null ? flight2.FromPlace + " To " + flight2.ToPlace : ""
+                        };
+                    }
+                }
+
+                //booking = new
+                //{
+                //    Id = bookingMaster.Id,
+                //    BookingDate = bookingMaster.BookingDate,
+                //    Email = bookingMaster.Email,
+                //    FlightId = bookingMaster.FlightId,
+                //    NoOfSeat = bookingMaster.NoOfSeat,
+                //    PNR = bookingMaster.PNR,
+                //    TicketPrice = bookingMaster.TicketPrice,
+                //    UserId = bookingMaster.UserId,
+                //    BookingDetails = bookDetails
+                //};
+                var result = JsonConvert.SerializeObject(booking);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

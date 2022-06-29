@@ -71,6 +71,12 @@ namespace BookingService.Migrations
                     b.Property<string>("PNR")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReturnFlightId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TicketPrice")
                         .HasColumnType("int");
 

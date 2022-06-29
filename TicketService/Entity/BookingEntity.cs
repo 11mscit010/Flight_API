@@ -19,5 +19,8 @@ namespace BookingService.Entity
         public DateTime BookingDate { get; set; }
         public int UserId { get; set; }
         public int TicketPrice { get; set; }
+        public int ReturnFlightId { get; set; }
+        public DateTime ReturnDate { get; set; }
+
     }
 }

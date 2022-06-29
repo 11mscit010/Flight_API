@@ -42,7 +42,8 @@ namespace FlightService.Service
 
         public List<FlightEntity> GetFlightbyLocation(string source, string destination)
         {
-            return context.FlightRepository.Where(z => !z.IsBlock && (z.FromPlace.ToLower().Contains(source) || z.ToPlace.ToLower().Contains(destination))).ToList();
+            //return context.FlightRepository.Where(z => !z.IsBlock && (z.FromPlace.ToLower().Contains(source) || z.ToPlace.ToLower().Contains(destination))).ToList();
+            return context.FlightRepository.Where(z => !z.IsBlock && (z.FromPlace == source || z.ToPlace == destination)).ToList();
         }
 
         public List<FlightEntity> GetAll()
@@ -80,6 +81,11 @@ namespace FlightService.Service
 
             context.FlightRepository.UpdateRange(flightList);
             context.SaveChanges();
+        }
+
+        public List<FlightEntity> GetListByIds(List<string> Ids)
+        {
+            return context.FlightRepository.Where(z=>Ids.Contains(z.Id.ToString())).ToList();
         }
     }
 }

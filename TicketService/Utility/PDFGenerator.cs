@@ -19,7 +19,7 @@ namespace BookingService.Utility
             //Create PDF Table  
             PdfPTable tableLayout = new PdfPTable(5);
             //Create a PDF file in specific path  
-            var filePathName = Path.Combine(Directory.GetCurrentDirectory(), "Downloads", model.PNR + "_" + DateTime.Now.Hour + "_" + "_Ticket.pdf");
+            var filePathName = Path.Combine(Directory.GetCurrentDirectory(), "Downloads", model.PNR + "_" + DateTime.Now.Ticks + "_" + "Ticket.pdf");
             PdfWriter.GetInstance(doc, new FileStream(filePathName, FileMode.Create));
             //Open the PDF document  
             doc.Open();

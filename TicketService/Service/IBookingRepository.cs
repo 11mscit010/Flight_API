@@ -16,6 +16,6 @@ namespace BookingService.Service
         List<BookingEntity> GetTicketHistory(string email, int userid);
         BookingEntity GetBookingById(int bookingID);
         List<BookingDetailEntity> GetBookingDetailById(int bookingID);
-        List<BookingEntity> GetBookingByUserId(int userID);
+        List<BookingEntity> GetBookingByUserId(int userID, bool fromHistory);
     }
 }

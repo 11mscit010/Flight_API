@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookingService.Entity;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace BookingService
 {
@@ -34,6 +36,11 @@ namespace BookingService
             });
             services.AddDbContextPool<AppDbContext>(opt => opt.UseSqlServer
                 (@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=FB_AirlineFlight;Trusted_Connection=True;"));
+
+            services.AddSingleton<IFileProvider>(
+            new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "Downloads")));
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +54,7 @@ namespace BookingService
             }
 
             app.UseRouting();
-
+            //app.UseStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

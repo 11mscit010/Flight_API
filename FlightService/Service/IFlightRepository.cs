@@ -17,5 +17,6 @@ namespace FlightService.Service
         void SaveChanges();
         bool AllowToCancelTicket(int flightId);
         void BlockUnblockFlight(int airlineId, bool isBlock);
+        List<FlightEntity> GetListByIds(List<string> Ids);
     }
 }

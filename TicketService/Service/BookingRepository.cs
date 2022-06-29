@@ -64,22 +64,7 @@ namespace BookingService.Service
         public List<BookingEntity> GetTicketByPNR(string PNR, int userid)
         {
             var booking = context.BookingRepository.Where(z => z.PNR == PNR && z.UserId ==userid).ToList();
-
-            //var bookingDetailList = context.BookingDetailRepository.Where(z => z.BookingId == booking.Id).ToList();
-
-            //var result = new BookingModel()
-            //{
-            //    Id = booking.Id,
-            //    Email = booking.Email,
-            //    NoOfSeat = booking.NoOfSeat,
-            //    PNR = booking.PNR,
-            //    FlightId = booking.FlightId,
-            //    UserId = booking.UserId,
-            //    BookingDate = booking.BookingDate,
-            //    BookingDetails = bookingDetailList
-            //};
-
-            return booking; //result;
+            return booking;
         }
 
         public List<BookingEntity> GetTicketHistory(string email, int userid)
@@ -100,10 +85,16 @@ namespace BookingService.Service
             var bookingDetail = context.BookingDetailRepository.Where(z => z.BookingId == bookingID).ToList();
             return bookingDetail;
         }
-        public List<BookingEntity> GetBookingByUserId(int userID)
+        public List<BookingEntity> GetBookingByUserId(int userID, bool fromHistory)
         {
-            var bookingDetail = context.BookingRepository.Where(z => z.UserId == userID && z.BookingDate > DateTime.Now).ToList();
-            return bookingDetail;
+            if (fromHistory)
+            {
+                return context.BookingRepository.Where(z => z.UserId == userID).ToList();
+            }
+            else
+            {
+                return context.BookingRepository.Where(z => z.UserId == userID && z.BookingDate > DateTime.Now).ToList();
+            }
         }
     }
 }

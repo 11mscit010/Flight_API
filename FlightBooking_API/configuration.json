@@ -440,7 +440,25 @@
         "UserRole": "User"
       }
     },
-
+    {
+      "DownstreamPathTemplate": "/api/Booking/GetDetailByBookingId",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9300"
+        }
+      ],
+      "UpstreamPathTemplate": "/Booking/GetDetailByBookingId",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "UserRole": "User"
+      }
+    },
     //User Service Configurations
     {
       "DownstreamPathTemplate": "/WeatherForecast",

@@ -58,7 +58,8 @@ namespace AirlineService.Controllers
             input1.Name = input.Name;
             if (!string.IsNullOrEmpty(filePathName))
             {
-                input1.Logo = filePathName;
+                var fileName = Path.GetFileName(filePathName);
+                input1.Logo = "/Images/" + fileName;
             }
             input1.ContactNumber = input.ContactNumber;
             input1.Address = input.Address;
@@ -122,6 +123,12 @@ namespace AirlineService.Controllers
         public ActionResult<string> GetAll()
         {
             var list = airlineRepository.GetAllAirline();
+            var host = $"{this.Request.Scheme}://{this.Request.Host}";
+            list = list.Select(z =>
+            {
+                z.Logo = host + z.Logo;
+                return z;
+            }).ToList();
             var result = JsonConvert.SerializeObject(list);
             return Ok(result);
         }
@@ -131,6 +138,8 @@ namespace AirlineService.Controllers
         public ActionResult<string> GetById(int Id)
         {
             var list = airlineRepository.GetByID(Id);
+            var host = $"{this.Request.Scheme}://{this.Request.Host}";
+            list.Logo = host + list.Logo;
             var result = JsonConvert.SerializeObject(list);
             return Ok(result);
         }
@@ -139,6 +148,12 @@ namespace AirlineService.Controllers
         public ActionResult<string> Find(string name)
         {
             var list = airlineRepository.GetAirlineByName(name);
+            var host = $"{this.Request.Scheme}://{this.Request.Host}";
+            list = list.Select(z =>
+            {
+                z.Logo = host + z.Logo;
+                return z;
+            }).ToList();
             var result = JsonConvert.SerializeObject(list);
             return Ok(result);
         }
